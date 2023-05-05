@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <div className='bg-red-500'>
-          hola mundo
+          hola mundo, chuchas!!!
         </div>
       </main>
     </>
