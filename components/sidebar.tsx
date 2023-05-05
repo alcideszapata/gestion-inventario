@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-export default class sidebar extends Component {
-  static propTypes = {second: third}
+const sidebar = () => {
 
-  render() {
     return (
-      <div>sidebar</div>
-    )
-  }
+        <div>sidebar hola chuchas</div>
+      )
 }
+
