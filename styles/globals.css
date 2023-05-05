@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.debug{
+    border: 1px solid red;
+}
+
+.h1 {
+    @apply text-2xl font-bold text-gray-900;
+}
