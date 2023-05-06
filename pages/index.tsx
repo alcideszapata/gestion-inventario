@@ -12,16 +12,66 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className='flex flex-col p-10 w-full h-full'>
+        <div className='hidden md:flex flex-col p-10 w-full h-full'>
           <div className='flex w-full justify-center'>
-            <h1 className='h1'>Gestión de inventario</h1>
+            <h1 >Gestión de inventario</h1>
           </div>
           <div className='flex justify-between'>
             <div>Material 1</div>
             <div>Agregar movimiento</div>
           </div>
-          <div className='h-full w-full'>tabla</div>
-          <div>saldo</div>
+          <div className='flex h-full w-full justify-center'>
+            <table>
+              <thead>
+                <tr>
+                  <th>Identificador</th>
+                  <th>Fecha</th>
+                  <th>Entrada</th>
+                  <th>Salida</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>uehddndbry</td>
+                  <td>22-04-201</td>
+                  <td>80</td>
+                  <td>30</td>
+                </tr>
+                <tr>
+                  <td>uehddndbry</td>
+                  <td>22-04-201</td>
+                  <td>80</td>
+                  <td>30</td>
+                </tr>
+                <tr>
+                  <td>uehddndbry</td>
+                  <td>22-04-201</td>
+                  <td>80</td>
+                  <td>30</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            </div>
+          <div className='flex justify-end'>saldo</div>
+        </div>
+        <div className='flex flex-col p-4 h-full w-full md:hidden'>
+          <div className='flex w-full justify-center'>
+            <h1 >Gestión de inventario</h1>
+          </div>
+          <div className='flex justify-end'>
+            <div>Material 1</div>
+            <div>Agregar movimiento</div>
+          </div>
+          <div className='grid grid-cols-2 h-full'>
+            <div>Card Entrada</div>
+            <div>Card Salida</div>
+            <div>Card Entrada</div>
+            <div>Card Salida</div>
+            <div>Card Entrada</div>
+            <div>Card Salida</div>
+          </div>
+          <div className='flex justify-end'>saldo</div>
         </div>
       </>
     </Layout>
