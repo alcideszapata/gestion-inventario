@@ -37,3 +37,11 @@ th {
   button {
     @apply bg-indigo-500 px-3 py-2 text-white rounded-lg hover:bg-indigo-400 shadow-lg; 
   }
+
+  li{
+    @apply rounded-md border border-gray-900 px-3 py-2 font-bold text-gray-900 bg-gray-200;
+  }
+
+  li:hover {
+    @apply cursor-pointer bg-gray-300;
+  }
