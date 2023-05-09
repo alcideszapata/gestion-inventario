@@ -2,6 +2,7 @@ import Navbar from "@components/Navbar";
 import Sidebar from "@components/Sidebar";
 import React, { Children } from "react";
 
+
 interface LayoutProps {
     children: JSX.Element;
 }
