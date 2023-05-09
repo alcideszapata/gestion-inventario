@@ -1,6 +1,16 @@
 import Layout from '@layouts/Layout'
 import Head from 'next/head'
+import { data } from 'utils/fakeData';
+import _ from 'lodash';
+import { DataMaterials } from '@components/DataMaterials';
+import { ActionButtonM } from '@components/ActionButtonM';
+import { ModalEntradas } from '@components/modals/ModalEntradas';
+import { ModalSalidas } from '@components/modals/ModalSalidas';
+import { useState } from 'react';
 
+/*import { ModalEntradas } from '@components/modals/ModalEntradas';*/
+/*import { ModalSalidas } from '@components/modals/ModalSalidas';*/
+/*import { EntradasContextProvider } from '@context/EntradasContext';*/
 
 export default function Home() {
   return (
@@ -12,68 +22,90 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className='hidden md:flex flex-col p-10 w-full h-full'>
-          <div className='flex w-full justify-center'>
-            <h1 >Gestión de inventario</h1>
-          </div>
-          <div className='flex justify-between'>
-            <div>Material 1</div>
-            <div>Agregar movimiento</div>
-          </div>
-          <div className='flex h-full w-full justify-center'>
-            <table>
-              <thead>
-                <tr>
-                  <th>Identificador</th>
-                  <th>Fecha</th>
-                  <th>Entrada</th>
-                  <th>Salida</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>uehddndbry</td>
-                  <td>22-04-201</td>
-                  <td>80</td>
-                  <td>30</td>
-                </tr>
-                <tr>
-                  <td>uehddndbry</td>
-                  <td>22-04-201</td>
-                  <td>80</td>
-                  <td>30</td>
-                </tr>
-                <tr>
-                  <td>uehddndbry</td>
-                  <td>22-04-201</td>
-                  <td>80</td>
-                  <td>30</td>
-                </tr>
-              </tbody>
-            </table>
-            
-            </div>
-          <div className='flex justify-end'>saldo</div>
-        </div>
-        <div className='flex flex-col p-4 h-full w-full md:hidden'>
-          <div className='flex w-full justify-center'>
-            <h1 >Gestión de inventario</h1>
-          </div>
-          <div className='flex justify-end'>
-            <div>Material 1</div>
-            <div>Agregar movimiento</div>
-          </div>
-          <div className='grid grid-cols-2 h-full'>
-            <div>Card Entrada</div>
-            <div>Card Salida</div>
-            <div>Card Entrada</div>
-            <div>Card Salida</div>
-            <div>Card Entrada</div>
-            <div>Card Salida</div>
-          </div>
-          <div className='flex justify-end'>saldo</div>
-        </div>
+
+        <TableDesktop/>
+        <MobileCards/>
       </>
     </Layout>
   )
 }
+const TableDesktop = () => {
+  const [openModalEntradas, setOpenModalEntradas] = useState<boolean>(false);
+  const [openModalSalidas, setOpenModalSalidas] = useState<boolean>(false);
+  const tableData = data;
+  return (
+    <div className='hidden md:flex flex-col p-10 w-full h-full gap-3'>
+    <div className='flex w-full justify-center'>
+      <h1 >Gestión de inventario</h1>
+    </div>
+    <div className='flex justify-between'>
+      <DataMaterials/>
+      <ActionButtonM 
+        setOpenModalEntradas={setOpenModalEntradas} 
+        setOpenModalSalidas={setOpenModalSalidas}
+      />
+    </div>
+    <div className='flex h-full w-full justify-center'>
+      <table>
+        <thead>
+          <tr>
+            <th>Identificador</th>
+            <th>Fecha</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((el)=>{
+            return(
+              <tr>
+                <td>{el.Identificador}</td>
+                <td>{el.Fecha}</td>
+                <td>{el.Entrada}</td>
+                <td>{el.Salida}</td>
+              </tr>
+            );
+          }) }
+        </tbody>
+      </table>  
+    </div>
+    <div className='flex justify-end'>saldo</div>
+    <ModalEntradas 
+      openModalEntradas={openModalEntradas} 
+      setOpenModalEntradas={setOpenModalEntradas} 
+    />
+    <ModalSalidas 
+      openModalSalidas={openModalSalidas} 
+      setOpenModalSalidas={setOpenModalSalidas} 
+    /> 
+    </div>
+    
+)
+};
+const MobileCards = () => {
+  const [openModalEntradas, setOpenModalEntradas] = useState<boolean>(false);
+  const [openModalSalidas, setOpenModalSalidas] = useState<boolean>(false);
+  return (
+    <div className='flex flex-col p-4 h-full w-full md:hidden'>
+    <div className='flex w-full justify-center'>
+      <h1 >Gestión de inventario</h1>
+    </div>
+    <div className='flex justify-end'>
+      <DataMaterials/>
+      <ActionButtonM 
+        setOpenModalEntradas={setOpenModalEntradas} 
+        setOpenModalSalidas={setOpenModalSalidas}
+      />
+    </div>
+    <div className='grid grid-cols-2 h-full'>
+      <div>Card Entrada</div>
+      <div>Card Salida</div>
+      <div>Card Entrada</div>
+      <div>Card Salida</div>
+      <div>Card Entrada</div>
+      <div>Card Salida</div>
+    </div>
+    <div className='flex justify-end'>saldo</div>
+  </div>
+  )
+};
