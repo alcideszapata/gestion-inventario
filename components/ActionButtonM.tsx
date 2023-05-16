@@ -16,6 +16,8 @@ const ActionButtonM = (/*{setOpenModalEntradas, setOpenModalSalidas}:ActionButto
     <div className=" flex gap-3 items-end ">
         <button /*onClick={() => setOpenModalEntradas(true)}*/>Agregar Entrada</button>
         <button /*onClick={() => setOpenModalSalidas(true)}*/>Agregar Salida</button>
+        <button /*onClick={() => setOpenModalSalidas(true)}*/> <a href="/Materiales">Materiales</a></button>
+        <button /*onClick={() => setOpenModalSalidas(true)}*/> <a href="/Usuarios">Usuarios</a></button>
         {/* <ModalEntradas 
           openModalEntradas={openModalEntradas} 
           setOpenModalEntradas={setOpenModalEntradas} 
