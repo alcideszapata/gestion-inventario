@@ -3,16 +3,23 @@ import React from 'react'
 
 const Sidebar = () => {
 
-    return (
-      <aside className='debug hidden flex-col w-48 gap-8 p-4 md:flex'>
-        <div>Logo</div>
-        <div>
-            <div>Inventario</div>
-            <div>Materiales</div>
-            <div>Usuarios</div>
+  return (
+    <aside className='debug text-white bg-gray-700 hidden flex-col w-64 gap-8 p-4 md:flex justify-between'>
+      <div className='flex flex-col gap-12'>
+        <div className='debug flex items-center justify-center bg-gray-900'>
+          <img src="" alt="nombre usuario" className='h-24 w-12' />
         </div>
-      </aside>
-      )
+        <nav>
+          <ul className='flex flex-col gap-4'>
+            <li>Inventario</li>
+            <li>Materiales</li>
+            <li>Usuarios</li>
+          </ul>
+        </nav>
+      </div>
+      <button className='flex bg-blue-500 items-center justify-center '>log out</button>
+    </aside>
+  )
 }
 
 export default Sidebar

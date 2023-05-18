@@ -1,14 +1,14 @@
 import Layout from '@layouts/Layout'
 import Head from 'next/head'
 import { data } from 'utils/fakeData';
-import _ from 'lodash';
+import { NextPage } from 'next';
+import { MovimientosContextProvider } from '@context/MovimientosContext';
 import { DataMaterials } from '@components/DataMaterials';
 import { ActionButtonM } from '@components/ActionButtonM';
 import { ModalEntradas } from '@components/modals/ModalEntradas';
 import { ModalSalidas } from '@components/modals/ModalSalidas';
-import { MovimientosContextProvider } from '@context/MovimientosContext';
 
-export default function Home() {
+const Home: NextPage= () => {
   return (
     <Layout>
       <>
@@ -70,15 +70,17 @@ const TableDesktop = () => {
     </div>  
   );
 };
-const MobileCards = () => {
-  return (
+
+const MobileCards = () => {  
+return (
     <div className='flex flex-col p-4 h-full w-full md:hidden'>
     <div className='flex w-full justify-center'>
       <h1 >Gestión de inventario</h1>
     </div>
-    <div className='flex justify-end'>
+    <div className='flex flex-col justify-end'>
       <DataMaterials/>
       <ActionButtonM/>
+
     </div>
     <div className='grid grid-cols-2 h-full'>
       <div>Card Entrada</div>
@@ -92,3 +94,5 @@ const MobileCards = () => {
   </div>
   )
 };
+
+export default Home
