@@ -34,6 +34,12 @@ th {
     @apply outline-none border border-gray-300 px-2 py-1 rounded-lg focus:border-indigo-500;
   }
 
-  button {
+  button,
+  button[type='button'], 
+  button[type='submit'] {
     @apply bg-indigo-500 px-3 py-2 text-white rounded-lg hover:bg-indigo-400 shadow-lg; 
+  }
+
+  button.secondary {
+    @apply bg-white px-3 py-2 text-indigo-500 rounded-lg hover:bg-gray-100 shadow-lg;
   }
