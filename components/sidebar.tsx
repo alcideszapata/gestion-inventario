@@ -11,9 +11,9 @@ const Sidebar = () => {
         </div>
         <nav>
           <ul className='flex flex-col gap-4'>
-            <li>Inventario</li>
-            <li>Materiales</li>
-            <li>Usuarios</li>
+            <li> <a href="http://localhost:3000/" ></a>Inventario</li>
+            <li><a href="/Materiales"></a> Materiales</li>
+            <li><a href="/Usuarios"></a> Usuarios</li>
           </ul>
         </nav>
       </div>
