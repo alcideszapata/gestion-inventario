@@ -6,6 +6,7 @@ const ActionButtonM = () => {
     <div className='flex gap-3 items-end'>
       <button onClick={()=>setOpenModalEntradas(true)} >Agregar Entrada</button>
       <button onClick={()=>setOpenModalSalidas(true)}>Agregar Salida</button>
+      <button /* onClick={()=>setOpenModalSalidas(true)} */><a href="/Materiales"></a> Materiales</button>
     </div>
     
   );
