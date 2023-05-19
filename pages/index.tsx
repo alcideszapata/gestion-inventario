@@ -1,17 +1,12 @@
 import Layout from '@layouts/Layout'
 import Head from 'next/head'
 import { data } from 'utils/fakeData';
-
+import { NextPage } from 'next';
+import { MovimientosContextProvider } from '@context/MovimientosContext';
 import { DataMaterials } from '@components/DataMaterials';
 import { ActionButtonM } from '@components/ActionButtonM';
 import { ModalEntradas } from '@components/modals/ModalEntradas';
 import { ModalSalidas } from '@components/modals/ModalSalidas';
-import { useState } from 'react';
-import { NextPage } from 'next';
-
-/*import { ModalEntradas } from '@components/modals/ModalEntradas';*/
-/*import { ModalSalidas } from '@components/modals/ModalSalidas';*/
-/*import { EntradasContextProvider } from '@context/EntradasContext';*/
 
 const Home: NextPage= () => {
   return (
@@ -23,80 +18,69 @@ const Home: NextPage= () => {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        <MovimientosContextProvider>
+          <>
+            <TableDesktop/>
+            <MobileCards/>
+          </>
+        </MovimientosContextProvider>
 
-        <TableDesktop/>
-        <MobileCards/>
       </>
     </Layout>
   )
 }
 const TableDesktop = () => {
-  /*const [openModalEntradas, setOpenModalEntradas] = useState<boolean>(false);
-  const [openModalSalidas, setOpenModalSalidas] = useState<boolean>(false);*/
   const tableData = data;
   return (
     <div className='hidden md:flex flex-col p-10 w-full h-full gap-3'>
-    <div className='flex w-full justify-center'>
-      <h1 >Gestión de inventario</h1>
-    </div>
-    <div className='flex justify-between'>
-      <DataMaterials/>
-      <ActionButtonM 
-        /*setOpenModalEntradas={setOpenModalEntradas} 
-        setOpenModalSalidas={setOpenModalSalidas}*/
-      />
-    </div>
-    <div className='flex h-[70vh] w-full justify-center overflow-y-scroll'>
-      <table>
-        <thead>
-          <tr>
-            <th>Identificador</th>
-            <th>Fecha</th>
-            <th>Entrada</th>
-            <th>Salida</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((el)=>{
-            return(
-              <tr>
-                <td>{el.Identificador}</td>
-                <td>{el.Fecha}</td>
-                <td>{el.Entrada}</td>
-                <td>{el.Salida}</td>
-              </tr>
-            );
-          }) }
-        </tbody>
-      </table>  
-    </div>
-    <div className='flex justify-end'>saldo</div>
-    {/* <ModalEntradas 
-      openModalEntradas={openModalEntradas} 
-      setOpenModalEntradas={setOpenModalEntradas} 
-    />
-    <ModalSalidas 
-      openModalSalidas={openModalSalidas} 
-      setOpenModalSalidas={setOpenModalSalidas} 
-    />  */}
-    </div>
-    
-)
+      <div className='flex w-full justify-center'>
+        <h1 >Gestión de inventario</h1>
+      </div>
+      <div className='flex justify-between'>
+        <DataMaterials/>
+        <ActionButtonM/> 
+      </div>
+      <div className='flex h-full w-full justify-center'>
+        <table>
+          <thead>
+            <tr>
+              <th>Identificador</th>
+              <th>Fecha</th>
+              <th>Entrada</th>
+              <th>Salida</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((el)=>{
+              return(
+                <tr>
+                  <td>{el.Identificador}</td>
+                  <td>{el.Fecha}</td>
+                  <td>{el.Entrada}</td>
+                  <td>{el.Salida}</td>
+                </tr>
+              );
+            }) }
+          </tbody>
+        </table>  
+      </div>
+      <div className='flex justify-end'>saldo</div>
+      <ModalEntradas/>
+      <ModalSalidas/>
+    </div>  
+  );
 };
-const MobileCards = () => {
-  // const [openModalEntradas, setOpenModalEntradas] = useState<boolean>(false);
-  // const [openModalSalidas, setOpenModalSalidas] = useState<boolean>(false);
-  return (
+
+const MobileCards = () => {  
+return (
     <div className='flex flex-col p-4 h-full w-full md:hidden'>
     <div className='flex w-full justify-center'>
       <h1 >Gestión de inventario</h1>
     </div>
     <div className='flex flex-col justify-end'>
       <DataMaterials/>
-      <ActionButtonM 
-        // setOpenModalEntradas={setOpenModalEntradas} 
-        // setOpenModalSalidas={setOpenModalSalidas}
-      />
+      <ActionButtonM/>
+
     </div>
     <div className='grid grid-cols-2 h-full'>
       <div>Card Entrada</div>
