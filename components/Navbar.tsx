@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import { MdMenu, MdMenuOpen } from 'react-icons/md';
 
 const Navbar = () => {
