@@ -1,4 +1,4 @@
-import Layout from '@layouts/Layout'
+
 import Head from 'next/head'
 import { data } from 'utils/fakeDataMateriales';
 
@@ -8,6 +8,7 @@ import { ModalEntradas } from '@components/modals/ModalEntradas';
 import { ModalSalidas } from '@components/modals/ModalSalidas';
 import { useState } from 'react';
 import { NextPage } from 'next';
+import { Layout } from '@layouts/Layout';
 
 /*import { ModalEntradas } from '@components/modals/ModalEntradas';*/
 /*import { ModalSalidas } from '@components/modals/ModalSalidas';*/
@@ -108,7 +109,7 @@ const MobileCards = () => {
     </div>
     <div className='flex justify-end'>saldo</div>
   </div>
-  )
+  );
 };
 
 export default Home

@@ -1,4 +1,4 @@
-import Layout from '@layouts/Layout'
+
 import Head from 'next/head'
 import { data } from 'utils/fakeData';
 import { NextPage } from 'next';
@@ -7,6 +7,7 @@ import { DataMaterials } from '@components/DataMaterials';
 import { ActionButtonM } from '@components/ActionButtonM';
 import { ModalEntradas } from '@components/modals/ModalEntradas';
 import { ModalSalidas } from '@components/modals/ModalSalidas';
+import { Layout } from '@layouts/Layout';
 
 const Home: NextPage= () => {
   return (
@@ -40,7 +41,7 @@ const TableDesktop = () => {
         <DataMaterials/>
         <ActionButtonM/> 
       </div>
-      <div className='flex h-full w-full justify-center'>
+      <div className='flex h-[70vh] w-full justify-center overflow-scroll'>
         <table>
           <thead>
             <tr>
@@ -92,7 +93,7 @@ return (
     </div>
     <div className='flex justify-end'>saldo</div>
   </div>
-  )
+  );
 };
 
 export default Home
