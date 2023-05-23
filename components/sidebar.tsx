@@ -19,8 +19,8 @@ const Sidebar = () => {
       </div>
       <button className='flex bg-blue-500 items-center justify-center '>log out</button>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export {Sidebar};
 
