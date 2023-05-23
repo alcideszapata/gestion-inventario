@@ -14,7 +14,7 @@ const Navbar = () => {
             <div>Logo</div>
         </nav>
         
-      )
-}
+      );
+};
 
-export default Navbar
+export {Navbar};
