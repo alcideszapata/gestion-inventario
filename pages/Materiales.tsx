@@ -1,6 +1,6 @@
-import Layout from '@layouts/Layout'
+
 import Head from 'next/head'
-import { data } from 'utils/fakeData';
+import { data } from 'utils/fakeDataMateriales';
 
 import { DataMaterials } from '@components/DataMaterials';
 import { ActionButtonM } from '@components/ActionButtonM';
@@ -8,6 +8,7 @@ import { ModalEntradas } from '@components/modals/ModalEntradas';
 import { ModalSalidas } from '@components/modals/ModalSalidas';
 import { useState } from 'react';
 import { NextPage } from 'next';
+import { Layout } from '@layouts/Layout';
 
 /*import { ModalEntradas } from '@components/modals/ModalEntradas';*/
 /*import { ModalSalidas } from '@components/modals/ModalSalidas';*/
@@ -51,9 +52,9 @@ const TableDesktop = () => {
         <thead>
           <tr>
             <th>Identificador</th>
-            <th>Fecha</th>
-            <th>Entrada</th>
-            <th>Salida</th>
+            <th>Fecha de creacion</th>
+            <th>Nombre</th>
+            <th>Saldo</th>
           </tr>
         </thead>
         <tbody>
@@ -61,9 +62,9 @@ const TableDesktop = () => {
             return(
               <tr>
                 <td>{el.Identificador}</td>
-                <td>{el.Fecha}</td>
-                <td>{el.Entrada}</td>
-                <td>{el.Salida}</td>
+                <td>{el.Fechadecreacion}</td>
+                <td>{el.Nombre}</td>
+                <td>{el.Saldo}</td>
               </tr>
             );
           }) }
@@ -108,7 +109,7 @@ const MobileCards = () => {
     </div>
     <div className='flex justify-end'>saldo</div>
   </div>
-  )
+  );
 };
 
 export default Home

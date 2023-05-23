@@ -11,6 +11,8 @@
      setOpenModalEntradas: Dispatch<SetStateAction<boolean>>;
      openModalSalidas: boolean;
      setOpenModalSalidas: Dispatch<SetStateAction<boolean>>;
+     openModalEditarUsuarios: boolean;
+     setOpenModalEditarUsuarios: Dispatch<SetStateAction<boolean>>;
  }
 
  const MovimientosContext = createContext<MovimientosContextProps>(
@@ -28,6 +30,7 @@
  }:MovimientosContextProviderProps) => {
   const [openModalEntradas, setOpenModalEntradas] = useState<boolean>(false);
   const [openModalSalidas, setOpenModalSalidas] = useState<boolean>(false);
+  const [openModalEditarUsuarios, setOpenModalEditarUsuarios] = useState<boolean>(false);
  return (
     <MovimientosContext.Provider
         value={{
@@ -35,10 +38,12 @@
             setOpenModalEntradas,
             openModalSalidas,
             setOpenModalSalidas,
+            openModalEditarUsuarios,
+            setOpenModalEditarUsuarios,
         }}
     >
         {children}
     </MovimientosContext.Provider>
- );
+  );
  };
  export { MovimientosContextProvider };

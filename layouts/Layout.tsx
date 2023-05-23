@@ -16,8 +16,7 @@ const Layout = ({children}:LayoutProps) => {
             {children}
             </section>
         </main>
-    )
-    
-}
+    ); 
+};
 
-export default Layout
+export {Layout};
