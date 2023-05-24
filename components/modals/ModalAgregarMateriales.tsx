@@ -17,7 +17,7 @@ const FormModalAgregarMateriales = ()=>{
             <form className='flex flex-col gap-3'>
                 <label htmlFor="material">
                     <span>Material</span>
-                    <input type= 'string' name='material' placeholder='usuario a editar'/>
+                    <input type= 'string' name='material' placeholder='material a agregar'/>
                 </label>
                 <label htmlFor="Entry">
                     <span>Cantidad de material</span>
