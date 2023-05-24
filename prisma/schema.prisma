@@ -10,6 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Account {
+  id                String  @id @default(cuid())
+  usuarioId         Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  usuario usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  usuario      usuario     @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+}
+
 model usuario {
   id             Int    @id @default(autoincrement())
   fk_rol         Int
@@ -22,7 +49,9 @@ model usuario {
   email          String
   imagen         String
   relacion       roles  @relation(fields: [fk_rol], references: [id])
-  inventarios inventario[]
+  accounts       Account[]
+  inventarios    inventario[]
+  sessions       Session[]
 }
 
 model inventario {

@@ -6,6 +6,11 @@
     border: 1px solid red;
 }
 
+.login-bg{
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,57,125,1) 35%, rgba(0,212,255,1) 100%);
+}
+
 h1 {
     @apply text-2xl font-bold text-gray-900;
 }
