@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal } from './Modal';
 import { useMovimientosContext } from '@context/MovimientosContext';
 
+
 const ModalEditarUsuario = () => {
     const {openModalEditarUsuarios, setOpenModalEditarUsuarios} = useMovimientosContext();
     return (
@@ -26,6 +27,10 @@ const FormModalEditarUsuario = ()=>{
             <label htmlFor="rol">
                 <span>Nuevo Actual</span>
                 <input type= 'string' name='rol' placeholder='nuevo actual'/>
+            </label>
+            <label htmlFor="date">
+                <span>Fecha de modificación</span>
+                <input type= 'date' name='entryDate'/>
             </label>
             <div className='flex w-full gap-3 justify-center'>
                 <button type='button' className='secondary'>Confirmar</button>
