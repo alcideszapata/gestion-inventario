@@ -1,10 +1,10 @@
+<<<<<<< HEAD
 import React from 'react'
 import Link from 'next/link';
 import { signIn, useSession } from 'next-auth/react';
-
 const indexPage = () => {
-  const { data: session } = useSession();
-  return (
+    const { data: session } = useSession();
+    return (
     <div className='login-bg'>
       <div className='flex h-screen w-full flex-col items-center justify-center gap-5'>
         <img src='resources/icons/icon-gradient.png' />

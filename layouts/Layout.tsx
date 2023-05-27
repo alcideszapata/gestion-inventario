@@ -1,5 +1,5 @@
-import Navbar from "@components/Navbar";
-import Sidebar from "@components/Sidebar";
+import { Navbar } from "@components/Navbar";
+import { Sidebar } from "@components/sidebar";
 import React, { Children } from "react";
 
 
@@ -16,8 +16,7 @@ const Layout = ({children}:LayoutProps) => {
             {children}
             </section>
         </main>
-    )
-    
-}
+    ); 
+};
 
-export default Layout
+export {Layout};
