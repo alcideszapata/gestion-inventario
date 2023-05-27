@@ -24,7 +24,7 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  usuario usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario User @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -34,12 +34,12 @@ model Session {
   sessionToken String   @unique
   usuarioId    Int
   expires      DateTime
-  usuario      usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario      User  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 }
 
-model usuario {
+model User {
   id             Int          @id @default(autoincrement())
-  fk_rol         Int
+  fkRol          Int
   nombre1        String
   nombre2        String
   apellido1      String
@@ -48,68 +48,68 @@ model usuario {
   telefono       String
   email          String
   imagen         String
-  relacion       roles        @relation(fields: [fk_rol], references: [id])
+  relacion       Roles        @relation(fields: [fkRol], references: [id])
   accounts       Account[]
-  inventarios    inventario[]
+  inventarios    Inventario[]
   sessions       Session[]
 }
 
-model inventario {
-  id                Int      @id @default(autoincrement())
-  fk_usuario        Int
-  fk_entradas       Int
-  fk_salidas        Int
-  relacion_usuario  usuario  @relation(fields: [fk_usuario], references: [id])
-  relacion_entradas entradas @relation(fields: [fk_entradas], references: [id])
-  relacion_salidas  salidas  @relation(fields: [fk_salidas], references: [id])
+model Inventario {
+  id         Int      @id @default(autoincrement())
+  fkUsuario  Int
+  fkEntradas Int
+  fkSalidas  Int
+  usuarios   User  @relation(fields: [fkUsuario], references: [id])
+  entradas   Entradas @relation(fields: [fkEntradas], references: [id])
+  salidas    Salidas  @relation(fields: [fkSalidas], references: [id])
 }
 
-model materiales {
-  id             Int        @id @default(autoincrement())
+model Materiales {
+  id            Int        @id @default(autoincrement())
+  nombre        String
+  fechaCreacion DateTime
+  saldo         Decimal
+  entradas      Entradas[]
+  salidas       Salidas[]
+}
+
+model Permisos {
+  id             Int              @id @default(autoincrement())
   nombre         String
-  fecha_creacion DateTime
-  saldo          Decimal
-  entradas       entradas[]
-  salidas        salidas[]
+  descripcion    String
+  rolesXPermisos RolesXPermisos[]
 }
 
-model permisos {
-  id               Int                @id @default(autoincrement())
-  nombre           String
-  descripcion      String
-  roles_x_permisos roles_x_permisos[]
+model Roles {
+  id             Int              @id @default(autoincrement())
+  nombre         String
+  descripcion    String
+  rolesXPermisos RolesXPermisos[]
+  usuarios       User[]
 }
 
-model roles {
-  id               Int                @id @default(autoincrement())
-  nombre           String
-  descripcion      String
-  roles_x_permisos roles_x_permisos[]
-  usuarios         usuario[]
-}
-
-model roles_x_permisos {
+model RolesXPermisos {
   id                Int      @id @default(autoincrement())
   fk_rol            Int
   fk_permiso        Int
-  relacion_roles    roles    @relation(fields: [fk_rol], references: [id])
-  relacion_permisos permisos @relation(fields: [fk_permiso], references: [id])
+  relacion_roles    Roles    @relation(fields: [fk_rol], references: [id])
+  relacion_permisos Permisos @relation(fields: [fk_permiso], references: [id])
 }
 
-model entradas {
+model Entradas {
   id               Int          @id @default(autoincrement())
-  fk_material      Int
-  fecha_movimiento DateTime
+  fkMaterial      Int
+  fechaMovimiento DateTime
   cantidad         Int
-  relacion         materiales   @relation(fields: [fk_material], references: [id])
-  inventarios      inventario[]
+  relacion         Materiales   @relation(fields: [fkMaterial], references: [id])
+  inventarios      Inventario[]
 }
 
-model salidas {
+model Salidas {
   id             Int          @id @default(autoincrement())
-  fk_material    Int
-  fecha_creacion DateTime
+  fkMaterial    Int
+  fechaCreacion DateTime
   cantidad       Int
-  relacion       materiales   @relation(fields: [fk_material], references: [id])
-  inventarios    inventario[]
+  relacion       Materiales   @relation(fields: [fkMaterial], references: [id])
+  inventarios    Inventario[]
 }

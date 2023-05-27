@@ -14,10 +14,10 @@ const materialesEndpoint = async (
       break
     case 'POST':
       const { body } = req;
-      const newMaterial = await  prisma.materiales.create({
+      const newMaterial = await  prisma.Materiales.create({
         data: {
           nombre: body.nombre,
-          fecha_creacion: body.fecha_creacion,
+          fechaCreacion: body.fechaCreacion,
           saldo: body.saldo
         }
       })

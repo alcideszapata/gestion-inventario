@@ -1,21 +1,38 @@
-import {Prisma, PrismaClient} from ".prisma/client";
+import {Resolver} from "../../types";
 
-const prisma = new PrismaClient;
-const resolvers = {
+const resolvers: Resolver = {
     Query: {
-        materiales: async () => {
-            const materiales = await prisma.materiales.findMany();
+        materiales: async (parent, args, context) => {
+            const { db } = context;
+            const materiales = await db.materiales.findMany();
             return materiales;
         },
-        material: async () => {
-            const material = await prisma.materiales.findFirst({
+        material: async (parent, args, context) => {
+            const { db } = context;
+            const material = await db.materiales.findFirst({
                 where: {
                     id: {
-                        equals: 1,
+                        equals: args.id,
                     },
                 },
             });
             return material;
+        },
+    },
+    Mutation: {
+        createMaterial: async (parent, args, context) => {
+            const {nombre, fechaCreacion, saldo} = args;
+            const {db} = context;
+
+            const newMaterial = await db.materiales.create({
+                data: {
+                    nombre,
+                    fechaCreacion,
+                    saldo,
+                },
+            });
+
+            return newMaterial;
         },
     },
 };
