@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { Modal } from './Modal'
 import { useMovimientosContext } from '@context/MovimientosContext';
+import { FormButton } from './FormButton';
 
 const ModalEntradas = () => {
   const {openModalEntradas, setOpenModalEntradas} = useMovimientosContext();
   return (
     <Modal title='Agregar Entrada' open={openModalEntradas} setOpen={setOpenModalEntradas}>
-      <FormModalEntradas/>
+      <FormModalEntradas setOpenModal={setOpenModalEntradas} />
     </Modal>
   );
 };
 
-const FormModalEntradas = ()=>{
+interface FormModalEntradasIntercafe {
+  setOpenModal: Dispatch<SetStateAction<boolean>>
+}
+
+const FormModalEntradas = ({setOpenModal}:FormModalEntradasIntercafe)=>{
   return (
   <div>
     <form className='flex flex-col gap-3'>
@@ -27,10 +32,10 @@ const FormModalEntradas = ()=>{
         <span>Fecha del ingreso</span>
         <input type= 'date' name='entryDate'/>
       </label>
-      <div className='flex w-full gap-3 justify-center'>
-        <button type='submit'>Ingresar</button>
-        <button type='button' className='secondary'>Cancelar</button>
-      </div>
+      <FormButton
+        loading={false}
+        setOpenModal={setOpenModal}
+      />
     </form>
   </div>
   );
