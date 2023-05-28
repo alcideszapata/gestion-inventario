@@ -8,7 +8,7 @@ import ReactLoading from 'react-loading';
 
  const FormButton = ({loading, setOpenModal}: FormButtonProps) => (
      <div className='flex w-full justify-center gap-4'>
-       <button type='submit' /*disabled={loading}*/>
+       <button type='submit' disabled={false}>
           {loading ? (
            <ReactLoading type='spin' height={30} width={30} color='blue' />
          ) : (
