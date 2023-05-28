@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { Modal } from './Modal'
 import { useMovimientosContext } from '@context/MovimientosContext';
+import { FormButton } from './FormButton';
 
 const ModalSalidas = () => {
   const {openModalSalidas, setOpenModalSalidas} = useMovimientosContext();
   return (
     <Modal title='Agregar Salida' open={openModalSalidas} setOpen={setOpenModalSalidas}>
-        <FormModalSalidas/>
+        <FormModalSalidas setOpenModal={setOpenModalSalidas} />
     </Modal>
   );
 };
 
-const FormModalSalidas = () => {
+interface FormModalSalidasProps{
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const FormModalSalidas = ({setOpenModal}:FormModalSalidasProps) => {
   return (
     <div>
       <form className='flex flex-col gap-3'>
@@ -27,10 +32,10 @@ const FormModalSalidas = () => {
         <span>Fecha del ingreso</span>
         <input type= 'date' name='dischargeDate'/>
       </label>
-      <div className='flex w-full gap-3 justify-center'>
-        <button type='submit'>Aceptar</button>
-        <button type='button' className='secondary'>Cancelar</button>
-      </div>
+      <FormButton
+        loading={false}
+        setOpenModal={setOpenModal}
+      />
       </form>
     </div>
   )
