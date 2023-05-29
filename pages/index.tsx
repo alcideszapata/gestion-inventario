@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link';
 import { signIn, useSession } from 'next-auth/react';
-const indexPage = () => {
+
+const IndexPage = () => {
     const { data: session } = useSession();
 
     console.log(session)
@@ -27,4 +28,4 @@ const indexPage = () => {
         </div>
     )
 }
-export default indexPage;
+export default IndexPage;
