@@ -5,7 +5,7 @@ import { Modal } from './Modal';
 const ModalAgregarMateriales = () => {
     const {openModalAgregarMateriales, setOpenModalAgregarMateriales} = useMovimientosContext();
   return (
-    <Modal title='Agregar Entrada' open={openModalAgregarMateriales} setOpen={setOpenModalAgregarMateriales}>
+    <Modal title='Agregar Material' open={openModalAgregarMateriales} setOpen={setOpenModalAgregarMateriales}>
     <FormModalAgregarMateriales/>
     </Modal>
   );
@@ -20,7 +20,7 @@ const FormModalAgregarMateriales = ()=>{
                     <input type= 'string' name='material' placeholder='material a agregar'/>
                 </label>
                 <label htmlFor="Entry">
-                    <span>Cantidad de material</span>
+                    <span>Saldo</span>
                     <input type= 'number' name='entry' placeholder='0' min={0}/>
                 </label>
                 <label htmlFor="date">
