@@ -6,7 +6,7 @@ import { useMovimientosContext } from '@context/MovimientosContext';
 const ModalEditarUsuario = () => {
     const {openModalEditarUsuarios, setOpenModalEditarUsuarios} = useMovimientosContext();
     return (
-        <Modal title='Agregar Entrada' open={openModalEditarUsuarios} setOpen={setOpenModalEditarUsuarios}>
+        <Modal title='Agregar usuario' open={openModalEditarUsuarios} setOpen={setOpenModalEditarUsuarios}>
         <FormModalEditarUsuario/>
         </Modal>
     );
