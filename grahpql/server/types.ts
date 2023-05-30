@@ -3,7 +3,7 @@ import {gql} from "graphql-tag";
 const typeDefs = gql`
   scalar DateTime
   
-  type materiales {
+  type Materiales {
       id: ID!
       nombre: String!
       fechaCreacion: DateTime!
@@ -11,12 +11,12 @@ const typeDefs = gql`
   }
     
   type Query {
-    materiales: [materiales]
-    material(id: Int!): materiales
+    materiales: [Materiales]
+    material(id: Int!): Materiales
   }
   
   type Mutation {
-    createMaterial(nombre: String!, fechaCreacion: String!, saldo: String): materiales
+    createMaterial(nombre: String!, fechaCreacion: String!, saldo: String): Materiales
   }
 `;
 
