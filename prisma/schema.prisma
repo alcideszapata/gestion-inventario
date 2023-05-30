@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id             String       @id @default(cuid())
+  fkRol          Int?
+  name           String?
+  nombre2        String?
+  apellido1      String?
+  apellido2      String?
+  identificacion String?
+  telefono       String?
+  email          String?      @unique
+  emailVerified  DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  image          String?
+  relacion       Roles?       @relation(fields: [fkRol], references: [id])
+  accounts       Account[]
+  inventarios    Inventario[]
+  sessions       Session[]
+}
+
+model Inventario {
+  id         Int      @id @default(autoincrement())
+  fkUsuario  String
+  fkEntradas Int
+  fkSalidas  Int
+  usuarios   User     @relation(fields: [fkUsuario], references: [id])
+  entradas   Entradas @relation(fields: [fkEntradas], references: [id])
+  salidas    Salidas  @relation(fields: [fkSalidas], references: [id])
+}
+
+model Materiales {
+  id            Int        @id @default(autoincrement())
+  nombre        String
+  fechaCreacion DateTime
+  saldo         Decimal
+  entradas      Entradas[]
+  salidas       Salidas[]
+}
+
+model Permisos {
+  id             Int              @id @default(autoincrement())
+  nombre         String
+  descripcion    String
+  rolesXPermisos RolesXPermisos[]
+}
+
+model Roles {
+  id             Int              @id @default(autoincrement())
+  nombre         String
+  descripcion    String
+  rolesXPermisos RolesXPermisos[]
+  usuarios       User[]
+}
+
+model RolesXPermisos {
+  id                Int      @id @default(autoincrement())
+  fk_rol            Int
+  fk_permiso        Int
+  relacion_roles    Roles    @relation(fields: [fk_rol], references: [id])
+  relacion_permisos Permisos @relation(fields: [fk_permiso], references: [id])
+}
+
+model Entradas {
+  id              Int          @id @default(autoincrement())
+  fkMaterial      Int
+  fechaMovimiento DateTime
+  cantidad        Int
+  relacion        Materiales   @relation(fields: [fkMaterial], references: [id])
+  inventarios     Inventario[]
+}
+
+model Salidas {
+  id            Int          @id @default(autoincrement())
+  fkMaterial    Int
+  fechaCreacion DateTime
+  cantidad      Int
+  relacion      Materiales   @relation(fields: [fkMaterial], references: [id])
+  inventarios   Inventario[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

@@ -5,8 +5,6 @@ import { Layout } from '@layouts/Layout';
 import { ModalAgregarMateriales } from '@components/modals/ModalAgregarMateriales';
 import ActionButtonA from '@components/ActionButtonA';
 import { MovimientosContextProvider } from '@context/MovimientosContext';
-import {useQuery} from "@apollo/client";
-import {GET_MATERIALES} from "../grahpql/client/material";
 
 const Home: NextPage= () => {
   return (
@@ -29,7 +27,7 @@ const Home: NextPage= () => {
   )
 }
 const TableDesktop = () => {
-  const {data, loading, error} = useQuery(GET_MATERIALES);
+  const tableData = data;
   return (
     <div className='hidden md:flex flex-col p-10 w-full h-full gap-3'>
     <div className='flex w-full justify-center'>
@@ -49,20 +47,16 @@ const TableDesktop = () => {
           </tr>
         </thead>
         <tbody>
-        {data ? (
-            data.materiales.map((item: any) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.fechaCreacion}</td>
-                  <td>{item.nombre}</td>
-                  <td>{item.saldo}</td>
-                </tr>
-            ))
-        ) : (
-            <tr>
-              <td colSpan={4}>No hay datos disponibles</td>
-            </tr>
-        )}
+          {tableData.map((el)=>{
+            return(
+              <tr>
+                <td>{el.Identificador}</td>
+                <td>{el.Fechadecreacion}</td>
+                <td>{el.Nombre}</td>
+                <td>{el.Saldo}</td>
+              </tr>
+            );
+          }) }
         </tbody>
       </table>  
     </div>
