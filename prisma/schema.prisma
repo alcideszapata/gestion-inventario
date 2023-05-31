@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Enum_RoleName {
+  ADMIN
+  USER
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -39,7 +44,7 @@ model Session {
 
 model User {
   id             String       @id @default(cuid())
-  fkRol          Int?
+  roleId         String?
   name           String?
   nombre2        String?
   apellido1      String?
@@ -51,10 +56,10 @@ model User {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   image          String?
-  relacion       Roles?       @relation(fields: [fkRol], references: [id])
   accounts       Account[]
   inventarios    Inventario[]
   sessions       Session[]
+  role           Role?        @relation(fields: [roleId], references: [id])
 }
 
 model Inventario {
@@ -76,27 +81,13 @@ model Materiales {
   salidas       Salidas[]
 }
 
-model Permisos {
-  id             Int              @id @default(autoincrement())
-  nombre         String
-  descripcion    String
-  rolesXPermisos RolesXPermisos[]
-}
+model Role {
+  id    String        @id @default(cuid())
+  name  Enum_RoleName
+  users User[]
 
-model Roles {
-  id             Int              @id @default(autoincrement())
-  nombre         String
-  descripcion    String
-  rolesXPermisos RolesXPermisos[]
-  usuarios       User[]
-}
-
-model RolesXPermisos {
-  id                Int      @id @default(autoincrement())
-  fk_rol            Int
-  fk_permiso        Int
-  relacion_roles    Roles    @relation(fields: [fk_rol], references: [id])
-  relacion_permisos Permisos @relation(fields: [fk_permiso], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Entradas {

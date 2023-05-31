@@ -7,6 +7,11 @@ const resolvers: Resolver = {
             const materiales = await db.materiales.findMany();
             return materiales;
         },
+        usuarios: async (parent, args, context) => {
+            const { db } = context;
+            const usuarios = await db.user.findMany();
+            return usuarios;
+        },
         material: async (parent, args, context) => {
             const { db } = context;
             const material = await db.materiales.findFirst({
@@ -26,9 +31,9 @@ const resolvers: Resolver = {
 
             const newMaterial = await db.materiales.create({
                 data: {
-                    nombre,
-                    fechaCreacion,
-                    saldo,
+                    nombre: args.nombre,
+                    fechaCreacion: new Date(args.fechaCreacion),
+                    saldo: args.saldo,
                 },
             });
 
