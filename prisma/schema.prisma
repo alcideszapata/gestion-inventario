@@ -95,7 +95,7 @@ model Entradas {
   fkMaterial      Int
   fechaMovimiento DateTime
   cantidad        Int
-  relacion        Materiales   @relation(fields: [fkMaterial], references: [id])
+  material        Materiales   @relation(fields: [fkMaterial], references: [id])
   inventarios     Inventario[]
 }
 
