@@ -1,34 +1,26 @@
-import { Resolver } from "../../types";
+import {Resolver} from "../../types";
 
 const resolvers: Resolver = {
-    User: {
-        role: async (parent, args, context) =>
-            await context.db.roles.findUnique({
-                where: {
-                    id: parent.roleId,
-                },
-            }),
-    },
     Query: {
         materiales: async (parent, args, context) => {
             const { db } = context;
             const materiales = await db.materiales.findMany();
             return materiales;
         },
-        users: async (parent, args, context) => {
+        usuarios: async (parent, args, context) => {
             const { db } = context;
-
-            const users = await db.user.findMany();
-            return users;
+            const usuarios = await db.user.findMany();
+            return usuarios;
         },
-        user: async (parent, args, context) => {
+        entradas: async (parent, args, context) => {
             const { db } = context;
-            const user = await db.user.findFirst({
-                where: {
-                    email: args.email,
-                },
-            });
-            return user;
+            const entradas = await db.entradas.findMany();
+            return entradas;
+        },
+        inventarios: async (parent, args, context) => {
+            const { db } = context;
+            const inventarios = await db.inventario.findMany();
+            return inventarios;
         },
         material: async (parent, args, context) => {
             const { db } = context;
@@ -44,8 +36,8 @@ const resolvers: Resolver = {
     },
     Mutation: {
         createMaterial: async (parent, args, context) => {
-            const { nombre, fechaCreacion, saldo } = args;
-            const { db } = context;
+            const {nombre, fechaCreacion, saldo} = args;
+            const {db} = context;
 
             const newMaterial = await db.materiales.create({
                 data: {
@@ -57,7 +49,21 @@ const resolvers: Resolver = {
 
             return newMaterial;
         },
+        createEntrada: async (parent, args, context) => {
+            const {fkMaterial, fechaMovimiento, cantidad} = args;
+            const {db} = context;
+
+            const newEntrada = await db.entradas.create({
+                data: {
+                    fkMaterial: args.fkMaterial,
+                    fechaMovimiento: new Date(args.fechaMovimiento),
+                    cantidad: args.cantidad,
+                },
+            });
+
+            return newEntrada;
+        },
     },
 };
 
-export { resolvers };
+export {resolvers};
