@@ -9,9 +9,31 @@ const typeDefs = gql`
       fechaCreacion: DateTime!
       saldo: String!
   }
+  
+  type Role {
+    id: ID
+    name: String
+    users: [Usuarios]
+  }
+  
+  type Usuarios {
+      id: ID!
+      roleId:         String!
+      name:           String!
+      nombre2:        String!
+      apellido1:      String!
+      apellido2:      String!
+      identificacion: String!
+      telefono:       String!
+      email:          String!
+      emailVerified:  DateTime!
+      createdAt:      DateTime!
+      updatedAt:      DateTime!
+  }
     
   type Query {
     materiales: [Materiales]
+    usuarios: [Usuarios]
     material(id: Int!): Materiales
   }
   

@@ -2,6 +2,10 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { Modal } from './Modal'
 import { useMovimientosContext } from '@context/MovimientosContext';
 import { FormButton } from './FormButton';
+import {useQuery} from "@apollo/client";
+import {GET_MATERIALES} from "../../grahpql/client/material";
+import materiales from "../../pages/Materiales";
+import {Materiales} from ".prisma/client";
 
 const ModalEntradas = () => {
   const {openModalEntradas, setOpenModalEntradas} = useMovimientosContext();
@@ -17,12 +21,21 @@ interface FormModalEntradasIntercafe {
 }
 
 const FormModalEntradas = ({setOpenModal}:FormModalEntradasIntercafe)=>{
+  const {data, loading, error} = useQuery(GET_MATERIALES);
+  if (loading) return <p>loading...</p>;
   return (
   <div>
     <form className='flex flex-col gap-3'>
     <label htmlFor="deatail">
-        <span>Nombre del artículo</span>
-        <input type= 'string' name='detail' placeholder='artículo a ingresar' />
+        <span>Material</span>
+      <select name='material'>
+        <option disabled>Seleccione el material</option>
+        {data?.materiales.map(( material ) => (
+            <option key={material.id} value={material.id}>
+              {material.nombre}
+            </option>
+        ))}
+      </select>
       </label>
       <label htmlFor="Entry">
         <span>Cantidad a ingresar</span>
