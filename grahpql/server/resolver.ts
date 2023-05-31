@@ -1,16 +1,34 @@
-import {Resolver} from "../../types";
+import { Resolver } from "../../types";
 
 const resolvers: Resolver = {
+    User: {
+        role: async (parent, args, context) =>
+            await context.db.roles.findUnique({
+                where: {
+                    id: parent.roleId,
+                },
+            }),
+    },
     Query: {
         materiales: async (parent, args, context) => {
             const { db } = context;
             const materiales = await db.materiales.findMany();
             return materiales;
         },
-        usuarios: async (parent, args, context) => {
+        users: async (parent, args, context) => {
             const { db } = context;
-            const usuarios = await db.user.findMany();
-            return usuarios;
+
+            const users = await db.user.findMany();
+            return users;
+        },
+        user: async (parent, args, context) => {
+            const { db } = context;
+            const user = await db.user.findFirst({
+                where: {
+                    email: args.email,
+                },
+            });
+            return user;
         },
         material: async (parent, args, context) => {
             const { db } = context;
@@ -26,8 +44,8 @@ const resolvers: Resolver = {
     },
     Mutation: {
         createMaterial: async (parent, args, context) => {
-            const {nombre, fechaCreacion, saldo} = args;
-            const {db} = context;
+            const { nombre, fechaCreacion, saldo } = args;
+            const { db } = context;
 
             const newMaterial = await db.materiales.create({
                 data: {
@@ -42,4 +60,4 @@ const resolvers: Resolver = {
     },
 };
 
-export {resolvers};
+export { resolvers };

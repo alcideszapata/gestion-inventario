@@ -16,7 +16,7 @@ const typeDefs = gql`
     users: [Usuarios]
   }
   
-  type Usuarios {
+  type User {
       id: ID!
       roleId:         String!
       name:           String!

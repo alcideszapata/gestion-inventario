@@ -1,13 +1,24 @@
 import {gql} from "graphql-tag";
 
-const GET_USUARIOS = gql`
-    query Usuarios {
-          usuarios {
-            id
-            fkUsuario
-            fkEntradas
-          }
+const GET_USERS = gql`
+  query Users {
+    users {
+      name
+      email
     }
+  }
 `;
 
-export { GET_USUARIOS }
+const GET_USER = gql`
+  query User($email: String!) {
+    user(email: $email) {
+      email
+      name
+      role {
+        name
+      }
+    }
+  }
+`;
+
+export { GET_USER, GET_USERS }
