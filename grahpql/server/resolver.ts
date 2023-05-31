@@ -12,6 +12,16 @@ const resolvers: Resolver = {
             const usuarios = await db.user.findMany();
             return usuarios;
         },
+        entradas: async (parent, args, context) => {
+            const { db } = context;
+            const entradas = await db.entradas.findMany();
+            return entradas;
+        },
+        inventarios: async (parent, args, context) => {
+            const { db } = context;
+            const inventarios = await db.inventario.findMany();
+            return inventarios;
+        },
         material: async (parent, args, context) => {
             const { db } = context;
             const material = await db.materiales.findFirst({

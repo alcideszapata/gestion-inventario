@@ -1,8 +1,8 @@
 import { useMovimientosContext } from '@context/MovimientosContext';
 import React, { useState } from 'react';
 import { Modal } from './Modal';
-import {useMutation} from "@apollo/client";
-import {CREATE_MATERIALES} from "../../grahpql/client/material";
+import { useMutation } from "@apollo/client";
+import { CREATE_MATERIALES } from "../../grahpql/client/material";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,11 +11,11 @@ const ModalAgregarMateriales = () => {
     const [material, setMaterial] = useState('');
     const [saldo, setSaldo] = useState(0);
     const [fechaIngreso, setFechaIngreso] = useState('');
-    const [excecuteMutation] = useMutation(CREATE_MATERIALES);
+    const [executeMutation] = useMutation(CREATE_MATERIALES);
 
     const handleConfirmar = async () => {
         try {
-            const result = await excecuteMutation({
+            const result = await executeMutation({
                 variables: {
                     nombre: material,
                     fechaCreacion: fechaIngreso.toString(),
@@ -47,16 +47,23 @@ const ModalAgregarMateriales = () => {
     );
 };
 
-const FormModalAgregarMateriales = ({ setMaterial, setSaldo, setFechaIngreso, handleConfirmar }) => {
-    const handleMaterialChange = (e) => {
+interface FormModalAgregarMaterialesProps {
+    setMaterial: React.Dispatch<React.SetStateAction<string>>;
+    setSaldo: React.Dispatch<React.SetStateAction<number>>;
+    setFechaIngreso: React.Dispatch<React.SetStateAction<string>>;
+    handleConfirmar: () => void;
+}
+
+const FormModalAgregarMateriales = ({ setMaterial, setSaldo, setFechaIngreso, handleConfirmar }: FormModalAgregarMaterialesProps) => {
+    const handleMaterialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMaterial(e.target.value);
     };
 
-    const handleSaldoChange = (e) => {
+    const handleSaldoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSaldo(Number(e.target.value));
     };
 
-    const handleFechaIngresoChange = (e) => {
+    const handleFechaIngresoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFechaIngreso(e.target.value);
     };
 

@@ -49,7 +49,7 @@ const TableDesktop = () => {
           </tr>
         </thead>
         <tbody>
-        {data ? (
+        {(data && data.materiales && data.materiales.length > 0) ? (
             data.materiales.map((item: any) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
