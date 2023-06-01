@@ -11,7 +11,7 @@ interface ResolverFunction {
 }
 
 export interface ExtendedUser extends User {
-    role: Roles;
+    role: Role;
   }
   
 export interface Resolver {

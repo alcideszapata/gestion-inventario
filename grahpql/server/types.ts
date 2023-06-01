@@ -10,26 +10,6 @@ const typeDefs = gql`
       saldo:         String!
   }
   
-  type Role {
-    id:     ID
-    name:   String
-    users:  [Usuarios]
-  }
-  
-  type Usuarios {
-      id: ID!
-      roleId:         String!
-      name:           String!
-      nombre2:        String!
-      apellido1:      String!
-      apellido2:      String!
-      identificacion: String!
-      telefono:       String!
-      email:          String!
-      emailVerified:  DateTime!
-      createdAt:      DateTime!
-      updatedAt:      DateTime!
-  }
   
   type Entradas {
       id:                ID!
@@ -48,12 +28,12 @@ const typeDefs = gql`
   type Role {
     id: ID
     name: String
-    users: [Usuarios]
+    users: [User]
   }
   
-  type Usuarios {
+  type User {
       id: ID!
-      roleId:         String!
+      role:           Role
       name:           String!
       nombre2:        String!
       apellido1:      String!
@@ -68,7 +48,8 @@ const typeDefs = gql`
     
   type Query {
     materiales:         [Materiales]
-    usuarios:           [Usuarios]
+    users: [User]
+    user(email: String!): User
     entradas:           [Entradas]
     inventarios:        [Inventarios]
     material(id: Int!): Materiales

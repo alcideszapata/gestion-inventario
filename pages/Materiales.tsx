@@ -3,13 +3,14 @@ import { data } from 'utils/fakeDataMateriales';
 import { NextPage } from 'next';
 import { Layout } from '@layouts/Layout';
 import { ModalAgregarMateriales } from '@components/modals/ModalAgregarMateriales';
+import PrivateRoute from '@components/PrivateRoute';
 import ActionButtonA from '@components/ActionButtonA';
 import { MovimientosContextProvider } from '@context/MovimientosContext';
 import {useQuery} from "@apollo/client";
 import {GET_MATERIALES} from "../grahpql/client/material";
 
-const Home: NextPage= () => {
-  return (
+const Home: NextPage= () => (
+  <PrivateRoute>
     <Layout>
       <>
         <Head>
@@ -26,8 +27,9 @@ const Home: NextPage= () => {
         </MovimientosContextProvider>
       </>
     </Layout>
+  </PrivateRoute>
   )
-}
+
 const TableDesktop = () => {
   const {data, loading, error} = useQuery(GET_MATERIALES);
   return (

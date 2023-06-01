@@ -20,6 +20,12 @@ const Sidebar = () => {
             <PrivateComponent role='ADMIN'>
               <li><a href="/Materiales">Materiales</a></li>
             </PrivateComponent>
+            <PrivateComponent role='USER'>
+              <li> <a href="/Inventario" >Inventario</a></li>
+            </PrivateComponent>
+            <PrivateComponent role='USER'>
+              <li><a href="/Materiales">Materiales</a></li>
+            </PrivateComponent>
             <PrivateComponent role='ADMIN'>
               <li><a href="/Usuarios">Usuarios</a></li>
             </PrivateComponent>
