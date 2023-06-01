@@ -1,13 +1,13 @@
-import { useMovimientosContext } from '@context/MovimientosContext';
-import React, { useState } from 'react';
-import { Modal } from './Modal';
-import { useMutation } from "@apollo/client";
-import { CREATE_MATERIALES } from "../../grahpql/client/material";
-import { toast } from 'react-toastify';
+import {useMovimientosContext} from '@context/MovimientosContext';
+import React, {useState} from 'react';
+import {Modal} from './Modal';
+import {useMutation} from "@apollo/client";
+import {CREATE_MATERIALES} from "../../grahpql/client/material";
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ModalAgregarMateriales = () => {
-    const { openModalAgregarMateriales, setOpenModalAgregarMateriales } = useMovimientosContext();
+    const {openModalAgregarMateriales, setOpenModalAgregarMateriales} = useMovimientosContext();
     const [material, setMaterial] = useState('');
     const [saldo, setSaldo] = useState(0);
     const [fechaIngreso, setFechaIngreso] = useState('');
@@ -55,11 +55,11 @@ interface FormModalAgregarMaterialesProps {
 }
 
 const FormModalAgregarMateriales = ({
-    setMaterial,
-    setSaldo,
-    setFechaIngreso,
-    handleConfirmar
-}: FormModalAgregarMaterialesProps) => {
+                                        setMaterial,
+                                        setSaldo,
+                                        setFechaIngreso,
+                                        handleConfirmar
+                                    }: FormModalAgregarMaterialesProps) => {
     const handleMaterialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMaterial(e.target.value);
     };
@@ -77,15 +77,16 @@ const FormModalAgregarMateriales = ({
             <form className='flex flex-col gap-3'>
                 <label htmlFor="material">
                     <span>Material</span>
-                    <input type='text' name='material' placeholder='material a agregar' onChange={handleMaterialChange} />
+                    <input type='text' name='material' placeholder='material a agregar'
+                           onChange={handleMaterialChange}/>
                 </label>
                 <label htmlFor="saldo">
                     <span>Saldo</span>
-                    <input type='number' name='saldo' placeholder='0' min={0} onChange={handleSaldoChange} />
+                    <input type='number' name='saldo' placeholder='0' min={0} onChange={handleSaldoChange}/>
                 </label>
                 <label htmlFor="fechaIngreso">
                     <span>Fecha de ingreso</span>
-                    <input type='date' name='fechaIngreso' onChange={handleFechaIngresoChange} />
+                    <input type='date' name='fechaIngreso' onChange={handleFechaIngresoChange}/>
                 </label>
                 <div className='flex w-full gap-3 justify-center'>
                     <button type='button' className='secondary' onClick={handleConfirmar}>Confirmar</button>
@@ -95,4 +96,4 @@ const FormModalAgregarMateriales = ({
     );
 };
 
-export { ModalAgregarMateriales };
+export {ModalAgregarMateriales};
