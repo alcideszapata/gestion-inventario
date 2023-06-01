@@ -3,8 +3,9 @@ import { Modal } from './Modal';
 import { useMovimientosContext } from '@context/MovimientosContext';
 import { FormButton } from './FormButton';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_MATERIALES } from '../../grahpql/client/material';
+import { CREATE_MATERIALES, GET_MATERIALES } from '../../grahpql/client/material';
 import { Materiales } from '.prisma/client';
+import { CREATE_ENTRADAS } from '../../grahpql/client/entradas';
 
 const ModalEntradas = () => {
   const { openModalEntradas, setOpenModalEntradas } = useMovimientosContext();
@@ -21,21 +22,20 @@ interface FormModalEntradasInterface {
 
 const FormModalEntradas = ({ setOpenModal }: FormModalEntradasInterface) => {
   const { data, loading, error } = useQuery(GET_MATERIALES);
-  const [materialId, setMaterialId] = useState('');
-  const [quantity, setQuantity] = useState(0);
-  const [entryDate, setEntryDate] = useState('');
-  //const [createEntrada] = useMutation(CREATE_ENTRADA);
+  const [materialId, setMaterialId] = useState<string>('');
+  const [quantity, setQuantity] = useState<number>(0);
+  const [entryDate, setEntryDate] = useState<string>('');
+
+  const [createEntrada] = useMutation(CREATE_ENTRADAS);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    /*e.preventDefault();
+    e.preventDefault();
     try {
       const result = await createEntrada({
         variables: {
-          data: {
-            cantidad: Number(quantity),
-            fechaMovimiento: new Date(entryDate),
-            relacion: { connect: { id: materialId } },
-          },
+          material: Number(materialId),
+          fechaMovimiento: entryDate,
+          cantidad: Number(quantity),
         },
       });
 
@@ -46,7 +46,7 @@ const FormModalEntradas = ({ setOpenModal }: FormModalEntradasInterface) => {
     } catch (error) {
       console.error(error);
       // Manejar el error en caso de que ocurra durante la creación de la entrada
-    }*/
+    }
   };
 
   if (loading) return <p>loading...</p>;

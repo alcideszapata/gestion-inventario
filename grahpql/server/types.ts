@@ -33,9 +33,9 @@ const typeDefs = gql`
   
   type Entradas {
       id:                ID!
-      fkMaterial:        String!
+      material:          Materiales!
       fechaMovimiento:   DateTime!
-      cantidad:          String!
+      cantidad:          Int!
   }
   
   type Inventarios {

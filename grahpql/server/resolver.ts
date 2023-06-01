@@ -50,19 +50,23 @@ const resolvers: Resolver = {
             return newMaterial;
         },
         createEntrada: async (parent, args, context) => {
-            const {fkMaterial, fechaMovimiento, cantidad} = args;
-            const {db} = context;
+            const { db } = context;
 
             const newEntrada = await db.entradas.create({
                 data: {
-                    fkMaterial: args.fkMaterial,
-                    fechaMovimiento: new Date(args.fechaMovimiento),
                     cantidad: args.cantidad,
+                    fechaMovimiento: new Date(args.fechaMovimiento),
+                    material: {
+                        connect: {
+                            id: args.material,
+                        }
+                    }
                 },
             });
 
             return newEntrada;
         },
+
     },
 };
 
