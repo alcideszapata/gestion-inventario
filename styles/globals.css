@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.debug{
+    border: 1px solid red;
+}
+
+.login-bg{
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,57,125,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+h1 {
+    @apply text-2xl font-bold text-gray-900;
+}
+
+table{
+    display: block;
+}
+
+th, td {
+    @apply border border-black;
+}
+
+th {
+    @apply bg-gray-700 px-3 text-white;
+  }
+
+  tr:nth-child(odd) {
+    @apply bg-gray-300;
+
+  } 
+  label {
+    @apply flex flex-col;
+  }
+
+  input {
+    @apply outline-none border border-gray-300 px-2 py-1 rounded-lg focus:border-indigo-500;
+  }
+
+  button {
+    @apply bg-indigo-500 px-3 py-2 text-white rounded-lg hover:bg-indigo-400 shadow-lg; 
+  }
+
+  li{
+    @apply rounded-md border border-gray-900 px-3 py-2 font-bold text-gray-900 bg-gray-200;
+  }
+
+  li:hover {
+    @apply cursor-pointer bg-gray-300;
+  }
+
+  button,
+  button[type='button'], 
+  button[type='submit'] {
+    @apply bg-indigo-500 px-3 py-2 text-white rounded-lg hover:bg-indigo-400 shadow-lg; 
+  }
+  
+  button.secondary {
+    @apply bg-white px-3 py-2 text-indigo-500 rounded-lg hover:bg-gray-100 shadow-lg;
+  }
