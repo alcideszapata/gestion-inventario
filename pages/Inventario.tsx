@@ -3,14 +3,15 @@ import Head from 'next/head'
 import { data } from 'utils/fakeData';
 import { NextPage } from 'next';
 import { MovimientosContextProvider } from '@context/MovimientosContext';
+import PrivateRoute from '@components/PrivateRoute';
 import { DataMaterials } from '@components/DataMaterials';
 import { ActionButtonM } from '@components/ActionButtonM';
 import { ModalEntradas } from '@components/modals/ModalEntradas';
 import { ModalSalidas } from '@components/modals/ModalSalidas';
 import { Layout } from '@layouts/Layout';
 
-const Home: NextPage= () => {
-  return (
+const Home: NextPage= () => (
+  <PrivateRoute>
     <Layout>
       <>
         <Head>
@@ -28,8 +29,10 @@ const Home: NextPage= () => {
 
       </>
     </Layout>
-  )
-}
+  </PrivateRoute>
+  
+)
+
 const TableDesktop = () => {
   const tableData = data;
   return (

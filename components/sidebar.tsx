@@ -1,5 +1,7 @@
 
 import React from 'react'
+import { signOut } from 'next-auth/react';
+import PrivateComponent from './PrivateComponent';
 
 const Sidebar = () => {
 
@@ -12,16 +14,28 @@ const Sidebar = () => {
         </div>
         <nav>
           <ul className='flex flex-col gap-4'>
-            <li> <a href="/Inventario" >Inventario</a></li>
-            <li><a href="/Materiales">Materiales</a></li>
-            <li><a href="/Usuarios">Usuarios</a></li>
+            <PrivateComponent role='ADMIN'>
+              <li> <a href="/Inventario" >Inventario</a></li>
+            </PrivateComponent>
+            <PrivateComponent role='ADMIN'>
+              <li><a href="/Materiales">Materiales</a></li>
+            </PrivateComponent>
+            <PrivateComponent role='USER'>
+              <li> <a href="/Inventario" >Inventario</a></li>
+            </PrivateComponent>
+            <PrivateComponent role='USER'>
+              <li><a href="/Materiales">Materiales</a></li>
+            </PrivateComponent>
+            <PrivateComponent role='ADMIN'>
+              <li><a href="/Usuarios">Usuarios</a></li>
+            </PrivateComponent>
           </ul>
         </nav>
       </div>
-      <button className='flex bg-blue-500 items-center justify-center '>log out</button>
+      <button className='flex bg-blue-500 items-center justify-center ' onClick={() => signOut()}>log out</button>
     </aside>
   );
 };
 
-export {Sidebar};
+export { Sidebar };
 
